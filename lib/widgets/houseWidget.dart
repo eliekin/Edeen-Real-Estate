@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class houseWidget extends StatelessWidget {
+class HouseWidget extends StatelessWidget {
   String imageUrl;
   String description;
   String price;
 
-  houseWidget(
+  HouseWidget(
       {required this.price, required this.imageUrl, required this.description});
 
   @override

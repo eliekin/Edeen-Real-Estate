@@ -1,41 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:myproprety/widgets/headerContainer.dart';
 
 import '../widgets/clientCategory.dart';
 import '../widgets/houseWidget.dart';
 import '../widgets/popularWidget.dart';
+import 'chat_screen.dart';
 import 'favorite_screen.dart';
-import 'userProfile_screen.dart';
+import '../widgets/floatingButton.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    );
+    controller.addListener(() {
+      void text() {
+        Column(
+          children: [
+            Image.asset(
+              'images/logo.png',
+              width: 100,
+              height: 100,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              'EDEEN REAL ESTATE',
+              style: TextStyle(letterSpacing: 2, fontSize: 20),
+            ),
+          ],
+        );
+      }
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var navigator = Navigator.of(context);
+
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        height: 60,
-        width: 60,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border:
-              Border.all(width: 4, color: Colors.redAccent.withOpacity(0.5)),
-          color: Colors.white.withOpacity(0.9),
-        ),
-        child: IconButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => favoriteScreen(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.favorite,
-            color: Colors.redAccent,
-            size: 30,
-          ),
-        ),
+      floatingActionButton: DraggableFab(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+          FloatingButton(onPresssed: () {
+            navigator.push(MaterialPageRoute(builder: (context) => FavoriteScreen()),);
+          }, icon: Icons.favorite),
+          SizedBox(width: 5,),
+          FloatingButton(onPresssed: (){
+            navigator.push(MaterialPageRoute(builder: (context) => ChatScreen(),),);
+          }, icon: Icons.message)
+        ],),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -43,42 +81,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset(
-                        'images/logo.png',
-                        width: 50,
-                        height: 50,
-                      ),
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 5.5,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => userProfileScreen(),
-                            ),
-                          );
-                        },
-                        icon: Icon(Icons.people),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              HeaderContainer(),
               SizedBox(
                 height: 20,
               ),
-              clientCategory(),
+              ClientCategory(),
               SizedBox(
                 height: 30,
               ),
@@ -89,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              popularWidget(
+              PopularWidget(
                   imageUrl:
                       'https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                   price: 'USD 2000'),
@@ -100,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                 'Find your happiness here',
                 style: TextStyle(fontSize: 20),
               ),
-              houseWidget(
+              HouseWidget(
                   description: 'the description goes here,',
                   imageUrl:
                       'https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg',
@@ -111,4 +118,5 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
 }

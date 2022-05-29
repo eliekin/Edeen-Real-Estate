@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
+import '../screens/userProfile_screen.dart';
 
-import 'userProfile_screen.dart';
-
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
-
+class HeaderContainer extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
-
     var navigator = Navigator.of(context);
-
-    return Scaffold(
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Container(
+    return Container(
               padding: EdgeInsets.only(top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      navigator.pop();
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new),
+                  Image.asset(
+                    'images/logo.png',
+                    width: 50,
+                    height: 50,
                   ),
                   Card(
                     shape: RoundedRectangleBorder(
@@ -44,10 +34,6 @@ class FavoriteScreen extends StatelessWidget {
                   )
                 ],
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            );
   }
 }

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-class sellerWidget extends StatelessWidget {
+class SellerWidget extends StatelessWidget {
   String imageUrl;
   String price;
   String description;
 
-  sellerWidget(
+  SellerWidget(
       {required this.description, required this.imageUrl, required this.price});
   @override
   Widget build(BuildContext context) {
+
+    var navigator = Navigator.of(context);
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
