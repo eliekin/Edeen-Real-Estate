@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen>
                 style: TextStyle(fontSize: 20),
               ),
               HouseWidget(
-                  description: 'the description goes here,',
+                  address: 'the address goes here,',
                   imageUrl:
                       'https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg',
                   price: 'USD 2000'),

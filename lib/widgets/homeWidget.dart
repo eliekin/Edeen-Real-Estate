@@ -6,9 +6,7 @@ class HomeWdiget extends StatelessWidget {
   String imageUrl;
 
   HomeWdiget(
-      {required this.description,
-      required this.imageUrl,
-      required this.price});
+      {required this.description, required this.imageUrl, required this.price});
 
   @override
   Widget build(BuildContext context) {

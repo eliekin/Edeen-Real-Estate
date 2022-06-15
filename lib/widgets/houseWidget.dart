@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class HouseWidget extends StatelessWidget {
   String imageUrl;
-  String description;
+  String address;
   String price;
 
   HouseWidget(
-      {required this.price, required this.imageUrl, required this.description});
+      {required this.price, required this.imageUrl, required this.address});
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +28,60 @@ class HouseWidget extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
                   ),
-                  child: Image.network(imageUrl),
+                  child: Stack(
+                    children: [
+                      Image.network(imageUrl),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                            alignment: Alignment.topRight,
+                            child: Card(
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.favorite_border_rounded,
+                                  size: 35,
+                                  color: Colors.cyan,
+                                ),
+                                onPressed: () {
+                                },
+                              ),
+                            )),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 14,bottom: 10),
                   child: Text(price),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10,bottom: 10),
-                  child: Text(description),
+                  padding: const EdgeInsets.only(left:10.0, bottom: 10),
+                  child: Row(children: [
+                    Icon(Icons.place_outlined), 
+                    Text(address)
+                  ],),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, bottom: 10,),
+                      child: Card(
+                        color: Colors.blueAccent,
+                        child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text('Details...', style: TextStyle(color: Colors.white),),
+                      ),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text('Date of publication'),
+                    )
+                  ],
                 ),
               ],
             ),

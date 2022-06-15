@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:file_picker/file_picker.dart';
 
 class PickerImageBox extends StatelessWidget {
   const PickerImageBox({
@@ -30,11 +30,32 @@ class PickerImageBox extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Icon(
-                Icons.camera_alt,
-                color: Colors.blue,
-                size: 60,
-              ),
+              IconButton(
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.blue,
+                    size: 60,
+                  ),
+                  onPressed: () async {
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles();
+                    if (result == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.white,
+                          content: Text(
+                            'Please provide an image',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.red),
+                          ),
+                        ),
+                      );
+                      return null;
+                    } else {
+                      final path = result.files.single.path;
+                    }
+                  }),
               SizedBox(
                 height: 5,
               ),

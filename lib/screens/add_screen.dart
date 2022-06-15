@@ -63,11 +63,12 @@ class _AddScreenState extends State<AddScreen> {
               PickerImageBox(),
               TextFormFieldWidget('Price', _descriptionFocusNode),
               TextFormFieldWidget('Description', _descriptionFocusNode),
+               TextFormFieldWidget('Address', _descriptionFocusNode),
               Container(
                 padding: EdgeInsets.only(top: 30),
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: const Text('Submit'),
+                  child: const Text('Add'),
                 ),
               ),
             ],
