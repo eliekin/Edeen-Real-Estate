@@ -14,22 +14,22 @@ class ClientCategory extends StatelessWidget {
         buildBtton(
             name: 'Buy',
             onPressed: () {
-              navigator.push(
+              navigator.pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => const HomeScreen(),
                 ),
               );
             },
             color: Colors.blue),
-        SizedBox(
+       const SizedBox(
           width: 10,
         ),
         buildBtton(
             name: 'Sell',
             onPressed: () {
-              navigator.push(
+              navigator.pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => SellerScreen(),
+                  builder: (context) => const SellerScreen(),
                 ),
               );
             },

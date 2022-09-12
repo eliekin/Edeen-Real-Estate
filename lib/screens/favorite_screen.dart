@@ -35,7 +35,7 @@ class FavoriteScreen extends StatelessWidget {
                       onPressed: () {
                         navigator.push(
                           MaterialPageRoute(
-                            builder: (context) => UserProfileScreen(),
+                            builder: (context) => UserProfileScreenForm(),
                           ),
                         );
                       },

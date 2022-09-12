@@ -7,7 +7,7 @@ class HeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     var navigator = Navigator.of(context);
     return Container(
-              padding: EdgeInsets.only(top: 20),
+              padding:const EdgeInsets.only(top: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -25,11 +25,11 @@ class HeaderContainer extends StatelessWidget {
                       onPressed: () {
                         navigator.push(
                           MaterialPageRoute(
-                            builder: (context) => UserProfileScreen(),
+                            builder: (context) => UserProfileScreenForm(),
                           ),
                         );
                       },
-                      icon: Icon(Icons.people),
+                      icon: Icon(Icons.person),
                     ),
                   )
                 ],

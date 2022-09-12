@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myproprety/screens/add_screen.dart';
-import 'package:myproprety/widgets/headerContainer.dart';
-
-import '../widgets/clientCategory.dart';
+import 'package:myproprety/screens/userProfile_screen.dart';
+import 'package:myproprety/widgets/drawer.dart';
 import '../widgets/sellerWidget.dart';
-import 'chat_screen.dart';
-import '../widgets/floatingButton.dart';
-import 'package:draggable_fab/draggable_fab.dart';
+
+
 
 class SellerScreen extends StatelessWidget {
   const SellerScreen({Key? key}) : super(key: key);
@@ -14,47 +12,87 @@ class SellerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var navigator = Navigator.of(context);
-
     return Scaffold(
-      floatingActionButton: DraggableFab(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingButton(onPresssed: () {
-              navigator.push(MaterialPageRoute(builder: ((context) => AddScreen())));
-            }, icon: Icons.add),
-            SizedBox(
-              width: 5,
+           appBar: AppBar(
+        elevation: 2.0,
+        backgroundColor: Colors.white,
+        leading: Padding(
+          padding: const EdgeInsets.only(left:8.0),
+          child: Builder(
+            builder: (context) => GestureDetector(
+              child: Image.asset(
+                'images/logo.png',
+                width: 50,
+                height: 50,
+              ),
+              onTap: () => Scaffold.of(context).openDrawer(),
             ),
-          FloatingButton(onPresssed: () {
-             navigator.push(MaterialPageRoute(builder: (context)=>ChatScreen(),),);
-          }, icon: Icons.message)
-          ],
-        ),
-      ),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              HeaderContainer(),
-              SizedBox(
-                height: 20,
-              ),
-              ClientCategory(),
-              SizedBox(
-                height: 30,
-              ),
-              SellerWidget(
-                  description: 'the description goes here',
-                  imageUrl:
-                      'https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg',
-                  price: 'USD 2000')
-            ],
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              elevation: 5.5,
+              child: IconButton(
+                onPressed: () {
+                  navigator.push(
+                    MaterialPageRoute(
+                      builder: (context) => UserProfileScreenForm(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.person,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: 
+          FloatingActionButton(
+            child: const Icon(Icons.add),
+             onPressed: () {
+                navigator.push(
+                  MaterialPageRoute(
+                    builder: ((context) => const AddScreen()),
+                  ),
+                );
+              },
+               elevation: 3,
+             ),
+      drawer: const DrawerEdited(),
+      body: ListView(
+        children: [
+          sizedBox(),
+          sizedBox(),
+          Container(
+            margin: const EdgeInsets.only(left: 20),
+            child: const Text(
+              'Your posts',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          sizedBox(),
+          Container(
+            height: 600,
+            width: 600,
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            child: SellerWidget(),
+          ),
+        ],
       ),
     );
   }
 
+  SizedBox sizedBox() {
+    return  const SizedBox(
+      height: 20,
+    );
+  }
 }

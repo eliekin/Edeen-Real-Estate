@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class TextFormFieldWidget extends StatelessWidget {
   late String labelText;
   late  FocusNode textFocusNode;
+  late String textValue;
 
-  TextFormFieldWidget(this.labelText, this.textFocusNode);
+  TextFormFieldWidget(this.labelText, this.textFocusNode, this.textValue);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,9 @@ class TextFormFieldWidget extends StatelessWidget {
             ),
             onFieldSubmitted: (_){
               return FocusScope.of(context).requestFocus(textFocusNode);
+            },
+            onChanged: (value){
+                textValue = value;
             },
             textInputAction: TextInputAction.newline,
             validator: (value) {
